@@ -1,80 +1,111 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Arcana Systems</title>
-  <style>
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      margin: 0;
-      padding: 60px 24px;
-      background: linear-gradient(135deg, #0f172a, #1e293b);
-      color: white;
-      text-align: center;
-    }
+    <title>Arcana Systems</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #012641;
+        }
 
-    .container {
-      max-width: 720px;
-      margin: 0 auto;
-    }
+        .nav {
+            background: #012641;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
 
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
-    }
+        .nav a {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+        }
 
-    .tagline {
-      font-size: 1.2rem;
-      opacity: 0.85;
-      margin-bottom: 40px;
-    }
+        .hero {
+            background: #012641;
+            color: white;
+            padding: 120px 20px;
+            text-align: center;
+        }
 
-    .btn {
-      display: inline-block;
-      padding: 16px 28px;
-      font-size: 1rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: 0.2s ease;
-    }
+        .section {
+            padding: 60px 20px;
+            max-width: 800px;
+            margin: auto;
+        }
 
-    .primary {
-      background: #22d3ee;
-      color: #0f172a;
-    }
+        .cta {
+            background: #EE005A;
+            color: white;
+            border: none;
+            padding: 14px 24px;
+            margin-top: 20px;
+            font-size: 16px;
+        }
 
-    .primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(34, 211, 238, 0.3);
-    }
-
-    footer {
-      margin-top: 60px;
-      font-size: 0.9rem;
-      opacity: 0.6;
-    }
-  </style>
+        footer {
+            background: #012641;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
 </head>
+
 <body>
-  <div class="container">
-    <h1>Arcana Systems ✨</h1>
-    <p class="tagline">
-      Build a business that moves like magic.<br>
-      Notion client portals, SOP libraries, and automation-ready systems.
+
+<header class="nav">
+    <div>Arcana Systems</div>
+    <div>
+        <a href="#">Services</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </div>
+</header>
+
+<section class="hero">
+    <h1>The operating system your business should have had from day one.</h1>
+    <p>
+        Arcana Systems builds custom Business Operating Systems in Microsoft 365 so your clients,
+        projects, SOPs, automations, and internal workflows finally live in one place and actually work together.
     </p>
+    <button class="cta">Book a Discovery Call</button>
+</section>
 
-    <a class="btn primary"
-       target="_blank"
-       rel="noopener"
-       href="https://forms.cloud.microsoft/r/94spmGdy7B">
-       Join the Waitlist
-    </a>
+<section class="section">
+    <h2>Your business grew. Your infrastructure didn’t.</h2>
+    <p>
+        Most businesses are running on inboxes, spreadsheets, scattered files, and memory.
+        Onboarding changes every time. Projects live in email threads.
+        SOPs are missing. Follow-up is manual.
+        Everything depends on the founder.
+    </p>
+    <p><b>You don’t need more tools. You need a system.</b></p>
+</section>
 
-    <footer>
-      hello@thearcanasystems.com
-    </footer>
-  </div>
+<section class="section">
+    <h2>We turn chaotic businesses into organized companies.</h2>
+    <ul>
+        <li>Client onboarding systems</li>
+        <li>Project and delivery workflows</li>
+        <li>SOP libraries and documentation</li>
+        <li>Microsoft 365 environments</li>
+        <li>Dashboards and reporting</li>
+        <li>Workflow automations</li>
+    </ul>
+</section>
+
+<section class="section">
+    <h2>Ready to get your business out of your head?</h2>
+    <button class="cta">Book a Discovery Call</button>
+</section>
+
+<footer>
+    <p>Arcana Systems — Build a business that moves like magic.</p>
+</footer>
+
 </body>
 </html>
