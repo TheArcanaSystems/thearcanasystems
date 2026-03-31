@@ -1,1 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    color: #012641;
+}
 
+.nav {
+    background: #012641;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.nav a {
+    color: white;
+    margin-left: 20px;
+    text-decoration: none;
+}
+
+.hero {
+    background: #012641;
+    color: white;
+    padding: 120px 20px;
+    text-align: center;
+}
+
+.section {
+    padding: 60px 20px;
+}
+
+.cta {
+    background: #EE005A;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+footer {
+    background: #012641;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
