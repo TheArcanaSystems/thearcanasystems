@@ -50,7 +50,7 @@ export function Topbar() {
       </Sheet>
 
       <div className="flex min-w-0 flex-col">
-        <h1 className="truncate text-sm font-semibold">
+        <h1 className="font-display truncate text-base font-semibold">
           {current?.title ?? "Dashboard"}
         </h1>
         {current?.description ? (

@@ -39,11 +39,27 @@ before assuming API shapes).
   `enableSystem={false}`) on `<ThemeProvider>` in `src/app/layout.tsx`. Light
   mode exists and is reachable via the toggle in the sidebar/topbar, but every
   page was designed against the dark palette first.
-- **Terracotta accent**: `--primary` is `#b85b38` (light) / `#c1693f` (dark),
-  defined as CSS variables in `src/app/globals.css` alongside the rest of the
-  shadcn token set (`background`, `card`, `accent`, `chart-1..5`,
-  `sidebar*`, etc.). Change the accent by editing those variables only — don't
-  hardcode the hex anywhere else.
+- **The Arcana Systems brand theme**: this dashboard is white-labeled on The
+  Arcana Systems' brand system (the parent business that builds it for
+  creators/clients), not tenfoldmarc's own colors. `--primary` is Royal
+  Violet `#3a1f61` (light) / Arcana Violet `#5b3a83` (dark) — buttons, nav,
+  and emphasis; Spark Gold `#c8a063` is reserved for accents and the brand
+  mark only, never a base/background color, per brand guidance ("keep gold
+  as an accent, never the base"). Backgrounds are Ivory `#faf6f0` (light) /
+  Deep Plum `#140b22` (dark); `--secondary`/`--muted` use Lavender Mist
+  `#f4f0f9`. All defined as CSS variables in `src/app/globals.css` alongside
+  the rest of the shadcn token set (`card`, `accent`, `chart-1..5`,
+  `sidebar*`, etc.) — change the palette by editing those variables only,
+  don't hardcode hex anywhere else. Typography pairs Cormorant Garamond
+  (`--font-display`, loaded in `src/app/layout.tsx`) for headlines/logo
+  moments — applied to `PageHeader`'s `h2`, `Topbar`'s `h1`, and the sidebar
+  handle in `creator-profile.tsx` — with Inter (`--font-sans`) for everything
+  else (body, nav, forms, captions). `src/components/dashboard/arcana-mark.tsx`
+  is the brand's stacked starburst/compass "spark" mark as an inline SVG
+  (no raster asset, so it tints with `currentColor`); it appears gold-tinted
+  next to the "Arcana Creator OS" label in `app-sidebar.tsx`'s footer and as
+  the favicon (`src/app/icon.svg`, on a Deep Plum tile — replaces the default
+  Next.js favicon).
 - **Route structure**: `src/app/(dashboard)/layout.tsx` wraps all six pages
   with the shared `AppSidebar` + `Topbar` shell. `src/app/page.tsx` just
   redirects to `/hook-vault`, which is treated as the default/home page.

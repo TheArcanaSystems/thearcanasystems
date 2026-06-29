@@ -12,7 +12,7 @@ export function CreatorProfile() {
       </Avatar>
       <div className="flex min-w-0 flex-col">
         <div className="flex items-center gap-1">
-          <span className="truncate text-sm font-semibold text-sidebar-foreground">
+          <span className="truncate font-display text-base font-semibold text-sidebar-foreground">
             @tenfoldmarc
           </span>
           <BadgeCheck className="size-3.5 shrink-0 text-sidebar-primary" />

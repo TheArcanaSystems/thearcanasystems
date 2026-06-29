@@ -1,3 +1,4 @@
+import { ArcanaMark } from "@/components/dashboard/arcana-mark";
 import { CreatorProfile } from "@/components/dashboard/creator-profile";
 import { NavLinks } from "@/components/dashboard/nav-links";
 import { Separator } from "@/components/ui/separator";
@@ -13,9 +14,10 @@ export function AppSidebar() {
       </div>
       <Separator className="bg-sidebar-border" />
       <div className="flex items-center justify-between px-3 py-3">
-        <span className="text-xs text-sidebar-foreground/45">
-          Arcana Creator OS
-        </span>
+        <div className="flex items-center gap-1.5 text-sidebar-foreground/45">
+          <ArcanaMark className="size-3 text-[#c8a063]" />
+          <span className="text-xs">Arcana Creator OS</span>
+        </div>
         <ThemeToggle />
       </div>
     </aside>
