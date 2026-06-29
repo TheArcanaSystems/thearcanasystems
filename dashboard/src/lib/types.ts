@@ -24,16 +24,16 @@ export type Hook = {
   status: "unused" | "scheduled" | "used";
 };
 
-export type HeaterPost = {
+export type Post = {
   id: string;
-  hookId: string;
+  hookId?: string;
   caption: string;
   platform: Platform;
   postedAt: string;
   views: number;
   saves: number;
   newFollows: number;
-  heatScore: number;
+  popReason: string;
 };
 
 export type DailyMetric = {
@@ -41,6 +41,7 @@ export type DailyMetric = {
   views: number;
   saves: number;
   follows: number;
+  dms: number;
 };
 
 export type TrackedCreator = {

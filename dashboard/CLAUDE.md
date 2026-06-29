@@ -53,7 +53,8 @@ before assuming API shapes).
   data files are the intended integration seam:
   - `data/hooks.ts` → Hook Vault (each `Hook` carries a `hookType`, labeled
     via `lib/hook-type.ts`, for the type-based filter)
-  - `data/analytics.ts` → Analytics (daily metrics + weekly "heaters")
+  - `data/analytics.ts` → Analytics (180 days of daily metrics + raw post
+    performance, with "heaters" computed rather than pre-baked — see below)
   - `data/competitors.ts` → Competitor Tracker (tracked creators + their reels)
   - `data/scheduler.ts` → Scheduler queue (the page also holds ephemeral
     client-side `useState` on top of this seed so "New post" feels real
@@ -84,9 +85,21 @@ npm run lint     # eslint (flat config, react-hooks rules included)
   contrarian, secret, documentary), and a min-views threshold. "Use this"
   marks an unused hook `scheduled` and flips the button to "Sent to /script"
   — local state only for now, since there's no real `/script` pipeline yet.
-- **Analytics** — stat cards (views/saves/follows/engagement) with week-over-week
-  delta, a 14-day area chart, and a "heaters of the week" table ranked by a
-  mocked heat score.
+- **Analytics** — a 7d/30d/90d window selector (`Tabs` in the page header)
+  drives everything below it: four `MetricCard`s (views, saves, new follows,
+  DM volume) each with a delta vs. the prior equal-length period and an
+  embedded `Sparkline` (`components/dashboard/sparkline.tsx`, raw recharts,
+  bypasses the shadcn `ChartContainer` since it's just a 40px decorative
+  trend line); the existing area chart, now re-titled and re-sliced per the
+  selected window; and a heaters table. Heaters are **computed, not stored**:
+  `lib/heaters.ts` takes the `Post[]` fixture, finds the trailing 30-day
+  median view count, and flags any post at ≥2x that median, sorted by views
+  desc. `lib/metrics.ts` sums `DailyMetric` fields over the selected window
+  and diffs against the immediately preceding window of the same length for
+  the delta %. Window/period math lives in these two lib files specifically
+  so swapping in a real Instagram Graph API source later only means
+  replacing `data/analytics.ts` — the median/heater/delta logic doesn't care
+  where the rows came from.
 - **Competitor Tracker** — one card per tracked creator showing their top reels
   this week and a "scraped Xh ago" badge.
 - **Scheduler** — queue table + a dialog to draft a post: pick a hook, hit
