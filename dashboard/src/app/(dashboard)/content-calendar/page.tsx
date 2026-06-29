@@ -1,11 +1,22 @@
+"use client";
+
+import * as React from "react";
 import { Terminal, User } from "lucide-react";
 
 import { PageHeader } from "@/components/dashboard/page-header";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+} from "@/components/ui/sheet";
 import { calendarEntries } from "@/data/calendar";
 import { cn } from "@/lib/utils";
 import { platformMeta } from "@/lib/platform";
+import type { CalendarEntry } from "@/lib/types";
 
 function startOfMonthGrid(year: number, month: number) {
   const first = new Date(year, month, 1);
@@ -26,7 +37,26 @@ function isSameDay(a: Date, b: Date) {
   );
 }
 
+function formatTime(iso: string) {
+  return new Date(iso).toLocaleTimeString("en-US", {
+    hour: "numeric",
+    minute: "2-digit",
+  });
+}
+
+function formatFullDateTime(iso: string) {
+  return new Date(iso).toLocaleString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+  });
+}
+
 export default function ContentCalendarPage() {
+  const [selected, setSelected] = React.useState<CalendarEntry | null>(null);
+
   const today = new Date();
   const days = startOfMonthGrid(today.getFullYear(), today.getMonth());
   const monthLabel = today.toLocaleDateString("en-US", {
@@ -35,14 +65,19 @@ export default function ContentCalendarPage() {
   });
 
   const entriesByDay = days.map((day) =>
-    calendarEntries.filter((entry) => isSameDay(new Date(entry.date), day))
+    calendarEntries
+      .filter((entry) => isSameDay(new Date(entry.date), day))
+      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
   );
+
+  const selectedMeta = selected ? platformMeta[selected.platform] : null;
+  const SelectedIcon = selectedMeta?.icon;
 
   return (
     <div>
       <PageHeader
         title="Content Calendar"
-        description="Auto-filled by /script with hooks and angles."
+        description="Auto-filled by /script with hooks and angles. Click any slot for the full script and caption."
         action={
           <Badge variant="outline" className="gap-1.5">
             <Terminal className="size-3.5" />
@@ -100,16 +135,21 @@ export default function ContentCalendarPage() {
                       const meta = platformMeta[entry.platform];
                       const Icon = meta.icon;
                       return (
-                        <div
+                        <button
                           key={entry.id}
-                          className="flex items-start gap-1 rounded-sm bg-accent px-1.5 py-1 text-[11px] leading-tight text-accent-foreground"
+                          type="button"
+                          onClick={() => setSelected(entry)}
+                          className="flex w-full items-start gap-1 rounded-sm bg-accent px-1.5 py-1 text-left text-[11px] leading-tight text-accent-foreground transition-colors hover:bg-accent/70"
                         >
                           <Icon className={`mt-0.5 size-3 shrink-0 ${meta.className}`} />
-                          <span className="truncate">{entry.angle}</span>
+                          <span className="min-w-0 flex-1 truncate">
+                            <span className="font-medium">{formatTime(entry.date)}</span>{" "}
+                            {entry.angle}
+                          </span>
                           {entry.source === "/script" ? (
                             <Terminal className="mt-0.5 size-3 shrink-0 text-primary" />
                           ) : null}
-                        </div>
+                        </button>
                       );
                     })}
                     {entries.length > 2 ? (
@@ -124,6 +164,59 @@ export default function ContentCalendarPage() {
           </div>
         </CardContent>
       </Card>
+
+      <Sheet open={selected !== null} onOpenChange={(open) => !open && setSelected(null)}>
+        <SheetContent>
+          {selected && selectedMeta && SelectedIcon ? (
+            <>
+              <SheetHeader>
+                <SheetTitle className="flex items-center gap-2">
+                  <SelectedIcon className={`size-4 ${selectedMeta.className}`} />
+                  {selectedMeta.label}
+                  {selected.source === "/script" ? (
+                    <Badge variant="outline" className="gap-1 text-[10px]">
+                      <Terminal className="size-3" />
+                      /script
+                    </Badge>
+                  ) : (
+                    <Badge variant="outline" className="gap-1 text-[10px]">
+                      <User className="size-3" />
+                      manual
+                    </Badge>
+                  )}
+                </SheetTitle>
+                <SheetDescription>{formatFullDateTime(selected.date)}</SheetDescription>
+              </SheetHeader>
+
+              <div className="space-y-4 overflow-y-auto px-4 pb-4 text-sm">
+                <div>
+                  <p className="mb-1 text-xs font-medium text-muted-foreground">Hook</p>
+                  <p className="font-medium leading-snug">&ldquo;{selected.hookText}&rdquo;</p>
+                </div>
+
+                <div>
+                  <p className="mb-1 text-xs font-medium text-muted-foreground">Angle</p>
+                  <p className="text-muted-foreground">{selected.angle}</p>
+                </div>
+
+                <div>
+                  <p className="mb-1 text-xs font-medium text-muted-foreground">Caption</p>
+                  <p className="rounded-md bg-muted px-3 py-2 text-xs leading-relaxed text-muted-foreground">
+                    {selected.caption}
+                  </p>
+                </div>
+
+                <div>
+                  <p className="mb-1 text-xs font-medium text-muted-foreground">Full script</p>
+                  <p className="whitespace-pre-line rounded-md bg-muted px-3 py-2 text-xs leading-relaxed text-muted-foreground">
+                    {selected.script}
+                  </p>
+                </div>
+              </div>
+            </>
+          ) : null}
+        </SheetContent>
+      </Sheet>
     </div>
   );
 }

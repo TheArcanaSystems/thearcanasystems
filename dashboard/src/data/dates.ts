@@ -13,3 +13,10 @@ export function hoursAgo(n: number) {
   d.setHours(d.getHours() - n);
   return d.toISOString();
 }
+
+export function daysFromNowAt(n: number, hour: number, minute = 0) {
+  const d = new Date();
+  d.setDate(d.getDate() + n);
+  d.setHours(hour, minute, 0, 0);
+  return d.toISOString();
+}
