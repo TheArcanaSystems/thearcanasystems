@@ -55,7 +55,8 @@ before assuming API shapes).
     via `lib/hook-type.ts`, for the type-based filter)
   - `data/analytics.ts` → Analytics (180 days of daily metrics + raw post
     performance, with "heaters" computed rather than pre-baked — see below)
-  - `data/competitors.ts` → Competitor Tracker (tracked creators + their reels)
+  - `data/competitors.ts` → Competitor Tracker (8 tracked creators, top 5
+    scraped reels each — see below)
   - `data/scheduler.ts` → Scheduler queue (the page also holds ephemeral
     client-side `useState` on top of this seed so "New post" feels real
     without a backend)
@@ -100,8 +101,19 @@ npm run lint     # eslint (flat config, react-hooks rules included)
   so swapping in a real Instagram Graph API source later only means
   replacing `data/analytics.ts` — the median/heater/delta logic doesn't care
   where the rows came from.
-- **Competitor Tracker** — one card per tracked creator showing their top reels
-  this week and a "scraped Xh ago" badge.
+- **Competitor Tracker** — models a weekly scrape job (Sundays at 6:00 AM,
+  `lib/schedule.ts`'s `nextWeeklyRun`/`previousWeeklyRun` compute the next/last
+  run from a target weekday + hour) that pulls the top 5 reels from each of
+  the 8 tracked accounts, transcribes the audio, and extracts the spoken hook
+  separately from the on-screen text overlay (`CompetitorReel.hookText` vs.
+  `onScreenText` vs. `transcript` in `lib/types.ts` — these three frequently
+  differ in real reels, so they're modeled as distinct fields, not derived
+  from one string). Stat cards summarize accounts tracked / reels scraped /
+  top view count / next scrape time; a chip grid shows per-account follower
+  count, niche, and last-scraped badge; the main table lists all 40 reels
+  sorted by view count with a transcript dialog and a "Save to Hook Vault"
+  button (local `Set<string>` of saved ids — no cross-page store yet, same
+  caveat as Hook Vault's "Use this").
 - **Scheduler** — queue table + a dialog to draft a post: pick a hook, hit
   Autogenerate to fill a caption from that hook's template/angle, choose
   platforms, schedule. New posts are appended to local state immediately.

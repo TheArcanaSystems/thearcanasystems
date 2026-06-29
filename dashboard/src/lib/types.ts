@@ -56,8 +56,10 @@ export type TrackedCreator = {
 export type CompetitorReel = {
   id: string;
   creatorId: string;
-  caption: string;
-  hookSnippet: string;
+  rank: number;
+  hookText: string;
+  onScreenText: string;
+  transcript: string;
   views: number;
   likes: number;
   postedAt: string;
