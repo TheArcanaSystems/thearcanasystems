@@ -101,6 +101,23 @@ npm run build    # production build
 npm run lint     # eslint (flat config, react-hooks rules included)
 ```
 
+## Deployment
+
+`next.config.ts` sets `output: "export"` — every route here is statically
+generated (mocked data, no API routes/middleware/server actions), so `npm run
+build` emits a static `dashboard/out/` that any static host can serve.
+
+This dashboard deploys to its **own, separate Cloudflare Pages project** —
+never the same project that serves `thearcanasystems.com`'s root marketing
+site. The repo root (`index.html`, `CNAME`) and this `dashboard/` app are two
+unrelated sites sharing one repo; pointing a single Pages project's root
+directory at `dashboard/` would replace the live marketing site with this
+dashboard, which is never the intent. The dashboard's Pages project config:
+Root directory `dashboard`, Build command `npm run build`, Build output
+directory `out`. This is a standing decision (the client asked for "always
+separate"), not a one-off — any future per-client dashboard built from
+`CLIENT_DASHBOARD_PROMPT.md` should get its own Pages project the same way.
+
 ## Page notes
 
 - **Hook Vault** — card grid of saved hooks with hook text, fill-in-the-blank
