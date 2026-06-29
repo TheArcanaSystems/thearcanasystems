@@ -14,6 +14,15 @@ export function previousWeeklyRun(targetDay: number, targetHour: number, from = 
   return prev;
 }
 
+// Computes the next run time for a daily job (e.g. the 7am trending digest
+// email) without needing a real cron/scheduler backend yet.
+export function nextDailyRun(targetHour: number, from = new Date()) {
+  const next = new Date(from);
+  next.setHours(targetHour, 0, 0, 0);
+  if (next <= from) next.setDate(next.getDate() + 1);
+  return next;
+}
+
 export function formatRunTime(date: Date) {
   return date.toLocaleString("en-US", {
     weekday: "short",
