@@ -1,4 +1,4 @@
-export type Platform = "instagram" | "tiktok" | "youtube" | "x";
+export type Platform = "instagram" | "tiktok" | "youtube" | "x" | "threads";
 
 export type HookType =
   | "callout"
@@ -82,16 +82,28 @@ export type CalendarEntry = {
   angle: string;
   platform: Platform;
   source: "/script" | "manual";
+  caption: string;
+  script: string;
 };
 
 export type HookPotential = "high" | "medium" | "low";
+
+export type TrendingTag = "hook potential" | "explainer" | "skip";
+
+export type SourceType = "blog" | "x-list" | "rss";
+
+export type TrendingSource = {
+  id: string;
+  name: string;
+  type: SourceType;
+};
 
 export type TrendingItem = {
   id: string;
   title: string;
   summary: string;
-  source: string;
+  sourceId: string;
   publishedAt: string;
   hookPotential: HookPotential;
-  tags: string[];
+  tag: TrendingTag;
 };

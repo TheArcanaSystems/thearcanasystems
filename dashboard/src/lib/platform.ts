@@ -1,4 +1,4 @@
-import { Camera, Clapperboard, Music2, X, type LucideIcon } from "lucide-react";
+import { AtSign, Camera, Clapperboard, Music2, X, type LucideIcon } from "lucide-react";
 
 import type { Platform } from "@/lib/types";
 
@@ -27,6 +27,11 @@ export const platformMeta: Record<
     label: "X",
     icon: X,
     className: "text-sky-300",
+  },
+  threads: {
+    label: "Threads",
+    icon: AtSign,
+    className: "text-zinc-200",
   },
 };
 

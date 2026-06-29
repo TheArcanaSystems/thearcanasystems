@@ -5,18 +5,20 @@ import { Label } from "@/components/ui/label";
 import { platformMeta } from "@/lib/platform";
 import type { Platform } from "@/lib/types";
 
-const allPlatforms: Platform[] = ["instagram", "tiktok", "youtube", "x"];
+const allPlatforms: Platform[] = ["instagram", "tiktok", "youtube", "x", "threads"];
 
 export function PlatformCheckboxRow({
   selected,
   onChange,
+  options = allPlatforms,
 }: {
   selected: Platform[];
   onChange: (next: Platform[]) => void;
+  options?: Platform[];
 }) {
   return (
     <div className="flex flex-wrap gap-4">
-      {allPlatforms.map((platform) => {
+      {options.map((platform) => {
         const meta = platformMeta[platform];
         const Icon = meta.icon;
         const checked = selected.includes(platform);
