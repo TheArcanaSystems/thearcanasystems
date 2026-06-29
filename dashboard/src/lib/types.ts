@@ -1,9 +1,20 @@
 export type Platform = "instagram" | "tiktok" | "youtube" | "x";
 
+export type HookType =
+  | "callout"
+  | "command"
+  | "listicle"
+  | "proof"
+  | "pov"
+  | "contrarian"
+  | "secret"
+  | "documentary";
+
 export type Hook = {
   id: string;
   hookText: string;
   template: string;
+  hookType: HookType;
   platform: Platform;
   sourceHandle: string;
   niche: string;

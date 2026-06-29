@@ -51,7 +51,8 @@ before assuming API shapes).
 - **All data is mocked.** Every page reads from a typed fixture in
   `src/data/*.ts` (types in `src/lib/types.ts`) — there is no backend yet. The
   data files are the intended integration seam:
-  - `data/hooks.ts` → Hook Vault
+  - `data/hooks.ts` → Hook Vault (each `Hook` carries a `hookType`, labeled
+    via `lib/hook-type.ts`, for the type-based filter)
   - `data/analytics.ts` → Analytics (daily metrics + weekly "heaters")
   - `data/competitors.ts` → Competitor Tracker (tracked creators + their reels)
   - `data/scheduler.ts` → Scheduler queue (the page also holds ephemeral
@@ -78,6 +79,11 @@ npm run lint     # eslint (flat config, react-hooks rules included)
 
 - **Hook Vault** — card grid of saved hooks with hook text, fill-in-the-blank
   template, platform/niche/angle tags, and status (unused/scheduled/used).
+  Searchable/filterable by free-text (hook text + creator), niche, hook type
+  (`HookType` in `lib/types.ts`: callout, command, listicle, proof, pov,
+  contrarian, secret, documentary), and a min-views threshold. "Use this"
+  marks an unused hook `scheduled` and flips the button to "Sent to /script"
+  — local state only for now, since there's no real `/script` pipeline yet.
 - **Analytics** — stat cards (views/saves/follows/engagement) with week-over-week
   delta, a 14-day area chart, and a "heaters of the week" table ranked by a
   mocked heat score.
