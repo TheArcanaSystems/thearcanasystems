@@ -1,0 +1,222 @@
+import type { DailyMetric, Post } from "@/lib/types";
+import { daysAgo } from "@/data/dates";
+
+// 180 days of history so 90-day windows still have a full prior 90-day
+// window to diff against for week-over-week-style deltas.
+const HISTORY_DAYS = 180;
+
+function wave(i: number, base: number, amplitude: number, period: number, trendPerDay: number) {
+  return base + trendPerDay * i + amplitude * Math.sin((2 * Math.PI * i) / period);
+}
+
+export const dailyMetrics: DailyMetric[] = Array.from({ length: HISTORY_DAYS }, (_, i) => {
+  const views = Math.max(8_000, Math.round(wave(i, 30_000, 14_000, 7, 350) + 9_000 * Math.sin(i / 29)));
+  const saves = Math.max(300, Math.round(views * (0.045 + 0.01 * Math.sin(i / 15))));
+  const follows = Math.max(20, Math.round(views * (0.0035 + 0.0009 * Math.sin(i / 11 + 2))));
+  const dms = Math.max(4, Math.round(14 + 0.16 * i + 9 * Math.sin((2 * Math.PI * i) / 13)));
+
+  return {
+    date: daysAgo(HISTORY_DAYS - 1 - i),
+    views,
+    saves,
+    follows,
+    dms,
+  };
+});
+
+// Individual reel performance for the last 30 days, used to compute
+// "heaters" (any post >= 2x the trailing 30-day median view count).
+export const posts: Post[] = [
+  {
+    id: "po-1",
+    caption: "5 caption hooks that actually get saves",
+    platform: "instagram",
+    postedAt: daysAgo(28),
+    views: 28_400,
+    saves: 1_300,
+    newFollows: 95,
+    popReason: "Steady performer, no major spike.",
+  },
+  {
+    id: "po-2",
+    caption: "Behind the scenes: my editing setup for vertical video",
+    platform: "youtube",
+    postedAt: daysAgo(25),
+    views: 31_900,
+    saves: 1_450,
+    newFollows: 105,
+    popReason: "Steady performer, no major spike.",
+  },
+  {
+    id: "po-3",
+    caption: "Why I stopped trend-chasing and what I post now",
+    platform: "tiktok",
+    postedAt: daysAgo(22),
+    views: 36_200,
+    saves: 1_700,
+    newFollows: 120,
+    popReason: "Modest bump from a comment reply going semi-viral.",
+  },
+  {
+    id: "po-4",
+    hookId: "hk-3",
+    caption: "The 3-act structure I use for every hook",
+    platform: "instagram",
+    postedAt: daysAgo(20),
+    views: 42_800,
+    saves: 2_000,
+    newFollows: 145,
+    popReason: "Steady performer, no major spike.",
+  },
+  {
+    id: "po-5",
+    caption: "Carousel: niches that are underpriced right now",
+    platform: "instagram",
+    postedAt: daysAgo(18),
+    views: 47_500,
+    saves: 2_200,
+    newFollows: 160,
+    popReason: "Above-average carousel swipe-through completion.",
+  },
+  {
+    id: "po-6",
+    caption: "My content calendar, start to finish",
+    platform: "youtube",
+    postedAt: daysAgo(16),
+    views: 51_300,
+    saves: 2_350,
+    newFollows: 175,
+    popReason: "Steady performer, no major spike.",
+  },
+  {
+    id: "po-7",
+    hookId: "hk-3",
+    caption: "What I changed after auditing 100 of my own reels",
+    platform: "tiktok",
+    postedAt: daysAgo(14),
+    views: 58_900,
+    saves: 2_700,
+    newFollows: 200,
+    popReason: "Cross-posted to a second account, inflating reach slightly.",
+  },
+  {
+    id: "po-8",
+    hookId: "hk-5",
+    caption: "This is the exact caption formula that got me 40,000 saves.",
+    platform: "instagram",
+    postedAt: daysAgo(12),
+    views: 63_400,
+    saves: 2_950,
+    newFollows: 215,
+    popReason: "Steady performer, no major spike.",
+  },
+  {
+    id: "po-9",
+    hookId: "hk-9",
+    caption: "Three brands paid me $0 in year one. Here's what changed.",
+    platform: "youtube",
+    postedAt: daysAgo(10),
+    views: 67_100,
+    saves: 3_100,
+    newFollows: 230,
+    popReason: "Steady performer, no major spike.",
+  },
+  {
+    id: "po-10",
+    hookId: "hk-10",
+    caption: "POV: you finally find the hook formula that matches your niche.",
+    platform: "tiktok",
+    postedAt: daysAgo(9),
+    views: 72_600,
+    saves: 3_350,
+    newFollows: 250,
+    popReason: "Slight algorithmic push from a sound trending in the niche.",
+  },
+  {
+    id: "po-11",
+    hookId: "hk-11",
+    caption: "Cold DMs just killed my agency's entire sales call backlog.",
+    platform: "instagram",
+    postedAt: daysAgo(8),
+    views: 81_300,
+    saves: 3_750,
+    newFollows: 280,
+    popReason: "Resonated with a B2B audience segment outside the usual niche.",
+  },
+  {
+    id: "po-12",
+    hookId: "hk-12",
+    caption: "7 things I wish I knew before going full-time as a creator.",
+    platform: "youtube",
+    postedAt: daysAgo(7),
+    views: 94_700,
+    saves: 4_350,
+    newFollows: 330,
+    popReason: "Picked up by a YouTube Shorts shelf for \"career advice.\"",
+  },
+  {
+    id: "po-13",
+    caption: "I quit my 9-to-5 the same week my biggest brand deal fell through.",
+    platform: "tiktok",
+    postedAt: daysAgo(5),
+    views: 130_000,
+    saves: 6_100,
+    newFollows: 460,
+    popReason: "Strong hook but fell just short of heater territory — retention dipped after 3s.",
+  },
+  {
+    id: "po-14",
+    hookId: "hk-2",
+    caption: "Nobody tells you this about your first 90 days as a creator.",
+    platform: "instagram",
+    postedAt: daysAgo(3),
+    views: 198_000,
+    saves: 9_300,
+    newFollows: 740,
+    popReason: "Saved and re-shared by other creators as a \"quote tile\" — distribution outside the algorithm.",
+  },
+  {
+    id: "po-15",
+    hookId: "hk-7",
+    caption: "I quit my agency to post 1 reel a day. Day 47 update.",
+    platform: "tiktok",
+    postedAt: daysAgo(1),
+    views: 244_000,
+    saves: 12_800,
+    newFollows: 980,
+    popReason: "Posted at peak audience window and picked up a duet from a mid-size creator.",
+  },
+  {
+    id: "po-16",
+    hookId: "hk-6",
+    caption: "If your reels flop in the first 3 seconds, it's never the topic.",
+    platform: "youtube",
+    postedAt: daysAgo(2),
+    views: 388_000,
+    saves: 21_400,
+    newFollows: 1_510,
+    popReason: "Shorts shelf placement plus a comment-section debate that kept resurfacing the video.",
+  },
+  {
+    id: "po-17",
+    hookId: "hk-8",
+    caption: "The algorithm isn't broken. Your first frame is.",
+    platform: "instagram",
+    postedAt: daysAgo(4),
+    views: 612_000,
+    saves: 38_900,
+    newFollows: 2_640,
+    popReason: "New first-frame text overlay kept retention above 90% through the first second.",
+  },
+  {
+    id: "po-18",
+    hookId: "hk-4",
+    caption: "Stop posting daily. Do this instead and watch saves triple.",
+    platform: "tiktok",
+    postedAt: daysAgo(6),
+    views: 1_240_000,
+    saves: 64_300,
+    newFollows: 4_120,
+    popReason: "Posted right after a bigger creator made the same point — rode that trend wave for 48 hours.",
+  },
+];
