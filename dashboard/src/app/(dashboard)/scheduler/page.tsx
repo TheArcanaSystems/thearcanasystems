@@ -47,7 +47,7 @@ import { ctas } from "@/data/ctas";
 import { formatRelativeDate, platformMeta } from "@/lib/platform";
 import type { Platform, ScheduledPost } from "@/lib/types";
 
-const schedulerPlatforms: Platform[] = ["instagram", "threads"];
+const schedulerPlatforms: Platform[] = ["instagram", "linkedin"];
 
 const statusVariant: Record<
   ScheduledPost["status"],
@@ -74,7 +74,7 @@ export default function SchedulerPage() {
   const [hookId, setHookId] = React.useState<string>("");
   const [cta, setCta] = React.useState<string>(ctas[0]);
   const [caption, setCaption] = React.useState("");
-  const [platforms, setPlatforms] = React.useState<Platform[]>(["instagram", "threads"]);
+  const [platforms, setPlatforms] = React.useState<Platform[]>(["instagram", "linkedin"]);
   const [scheduledFor, setScheduledFor] = React.useState("");
 
   const queued = posts.filter((p) => p.status === "draft").length;
@@ -86,7 +86,7 @@ export default function SchedulerPage() {
     setHookId("");
     setCta(ctas[0]);
     setCaption("");
-    setPlatforms(["instagram", "threads"]);
+    setPlatforms(["instagram", "linkedin"]);
     setScheduledFor("");
   }
 
@@ -109,7 +109,7 @@ export default function SchedulerPage() {
     <div>
       <PageHeader
         title="Scheduler"
-        description="One click schedules your reel to Instagram and Threads. Captions autogenerate from hook + angle + CTA, and the Zernio MCP handles the actual posting."
+        description="One click schedules your post to Instagram or LinkedIn. Captions autogenerate from hook + angle + CTA, and the Zernio MCP handles the actual posting."
         action={
           <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>

@@ -20,9 +20,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "@tenfoldmarc · Arcana Creator OS",
+  title: "@thearcanasystems · Arcana Creator OS",
   description:
-    "Content dashboard for the tenfoldmarc creator business, built on The Arcana Systems' Creator OS",
+    "Content dashboard for @thearcanasystems, built on The Arcana Systems' Creator OS",
 };
 
 export default function RootLayout({

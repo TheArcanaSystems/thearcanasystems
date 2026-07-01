@@ -1,4 +1,4 @@
-import { AtSign, Camera, Clapperboard, Music2, X, type LucideIcon } from "lucide-react";
+import { AtSign, Briefcase, Camera, Clapperboard, Music2, X, type LucideIcon } from "lucide-react";
 
 import type { Platform } from "@/lib/types";
 
@@ -12,6 +12,11 @@ export const platformMeta: Record<
     label: "Instagram",
     icon: Camera,
     className: "text-pink-400",
+  },
+  linkedin: {
+    label: "LinkedIn",
+    icon: Briefcase,
+    className: "text-blue-400",
   },
   tiktok: {
     label: "TikTok",

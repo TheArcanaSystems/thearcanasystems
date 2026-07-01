@@ -1,6 +1,6 @@
-# tenfoldmarc Creator OS — Dashboard
+# @thearcanasystems Creator OS — Dashboard
 
-Content dashboard for the `@tenfoldmarc` creator business. Lives in this
+Content dashboard for the `@thearcanasystems` creator business. Lives in this
 `dashboard/` subfolder, not the repo root, because the repo root is the
 `TheArcanaSystems` GitHub Pages profile site (`index.html` + `CNAME`) — keeping
 the Next.js app in its own folder avoids clobbering that static site.
@@ -63,7 +63,7 @@ before assuming API shapes).
 - **Route structure**: `src/app/(dashboard)/layout.tsx` wraps all six pages
   with the shared `AppSidebar` + `Topbar` shell. `src/app/page.tsx` just
   redirects to `/hook-vault`, which is treated as the default/home page.
-- **Sidebar identity**: the creator handle `@tenfoldmarc` is pinned at the top
+- **Sidebar identity**: the creator handle `@thearcanasystems` is pinned at the top
   of the sidebar (`src/components/dashboard/creator-profile.tsx`), above the
   six-item nav defined in `src/config/nav.ts`. Mobile uses the same nav inside
   a shadcn `Sheet` triggered from the topbar hamburger button.
@@ -103,20 +103,17 @@ npm run lint     # eslint (flat config, react-hooks rules included)
 
 ## Deployment
 
-`next.config.ts` sets `output: "export"` — every route here is statically
-generated (mocked data, no API routes/middleware/server actions), so `npm run
-build` emits a static `dashboard/out/` that any static host can serve.
-
-This dashboard deploys to its **own, separate Cloudflare Pages project** —
-never the same project that serves `thearcanasystems.com`'s root marketing
-site. The repo root (`index.html`, `CNAME`) and this `dashboard/` app are two
-unrelated sites sharing one repo; pointing a single Pages project's root
-directory at `dashboard/` would replace the live marketing site with this
-dashboard, which is never the intent. The dashboard's Pages project config:
-Root directory `dashboard`, Build command `npm run build`, Build output
-directory `out`. This is a standing decision (the client asked for "always
-separate"), not a one-off — any future per-client dashboard built from
-`CLIENT_DASHBOARD_PROMPT.md` should get its own Pages project the same way.
+This dashboard deploys to its **own, separate Vercel project** (`arcana-creator-os`,
+`https://arcana-creator-os.vercel.app`) — never the same project that serves
+`thearcanasystems.com`'s root marketing site. The repo root (`index.html`, `CNAME`)
+is a static GitHub Pages / Cloudflare Pages site; this `dashboard/` app is a
+Next.js app on Vercel. They share one repo but are completely separate deployments.
+`next.config.ts` has **no `output: "export"`** — Vercel handles Next.js natively,
+so the build produces a standard Next.js server output, not a static `out/` dir.
+Vercel project config: Root directory `dashboard`, Build command `npm run build`,
+Framework preset `Next.js`. This is a standing decision (the client asked for
+"always separate"), not a one-off — any future per-client dashboard built from
+`CLIENT_DASHBOARD_PROMPT.md` should get its own Vercel project the same way.
 
 ## Page notes
 

@@ -4,49 +4,49 @@ import { daysFromNow, daysAgo } from "@/data/dates";
 export const scheduledPosts: ScheduledPost[] = [
   {
     id: "sp-1",
-    title: "Hook formula breakdown",
+    title: "Desktop audit carousel",
     caption:
-      "I audited 100 reels. The hook pattern that won every time: front-load the result, withhold the method, cut on the third word. A closer look at the research flex angle for content strategy creators. Save this before it disappears from your feed.",
-    platforms: ["instagram", "threads"],
+      "I audited 50 founder desktops. The chaos is always the same 4 problems. A closer look at the research reveal angle for business systems creators. Save this — your ops problem isn't unique.",
+    platforms: ["linkedin"],
     scheduledFor: daysFromNow(1),
     status: "scheduled",
     hookId: "hk-3",
   },
   {
     id: "sp-2",
-    title: "Day 47 founder update",
+    title: "M365 portal — month 6 update",
     caption:
-      "I quit my agency to post 1 reel a day. Day 47 update: 0 to 94K. A closer look at the documentary arc angle for founder journey creators. Follow for more breakdowns like this.",
-    platforms: ["threads"],
+      "I built a client portal in Microsoft 365 for $0. Month 6 update. A closer look at the documentary arc angle for business systems creators. Follow for monthly progress posts.",
+    platforms: ["linkedin"],
     scheduledFor: daysFromNow(2),
     status: "scheduled",
     hookId: "hk-7",
   },
   {
     id: "sp-3",
-    title: "Caption formula carousel",
+    title: "Template launch funnel breakdown",
     caption:
-      "This is the exact caption formula that got me 40,000 saves. A closer look at the proof + template angle for copywriting creators. Comment \"SEND\" and I'll DM you the template.",
+      "I sold 300 templates in 30 days with zero ad spend. Here's the funnel. A closer look at the proof + funnel reveal angle for digital products creators. Comment 'FUNNEL' and I'll send you the breakdown.",
     platforms: ["instagram"],
     scheduledFor: daysFromNow(4),
     status: "draft",
-    hookId: "hk-5",
+    hookId: "hk-9",
   },
   {
     id: "sp-4",
-    title: "Algorithm myth-bust",
+    title: "CRM reframe",
     caption:
-      "The algorithm isn't broken. Your first frame is. A closer look at the reframe angle for content strategy creators. Drop a 🔥 if you're trying this on your next post.",
-    platforms: ["instagram", "threads"],
+      "Your CRM isn't the problem. Your intake process is. A closer look at the reframe angle for business systems creators. Drop a 🔥 if this just described your stack.",
+    platforms: ["instagram", "linkedin"],
     scheduledFor: daysAgo(1),
     status: "posted",
-    hookId: "hk-8",
+    hookId: "hk-6",
   },
   {
     id: "sp-5",
-    title: "90-day creator reality check",
+    title: "Spreadsheet reality check",
     caption:
-      "Nobody tells you this about your first 90 days as a creator. A closer look at the insider secret angle for creator economy creators. Share this with the creator who needs to hear it.",
+      "Nobody tells you this about running a service business on spreadsheets. A closer look at the insider truth angle for business operations creators. Save this before your spreadsheet collapses again.",
     platforms: ["instagram"],
     scheduledFor: daysAgo(3),
     status: "posted",
@@ -54,10 +54,10 @@ export const scheduledPosts: ScheduledPost[] = [
   },
   {
     id: "sp-6",
-    title: "Stop posting daily teardown",
+    title: "Stop buying tools",
     caption:
-      "Stop posting daily. Do this instead and watch saves triple. A closer look at the contrarian angle for social strategy creators. Follow for more breakdowns like this.",
-    platforms: ["threads"],
+      "Stop buying more tools. Build the system first. A closer look at the contrarian command angle for business operations creators. Follow for more breakdowns like this.",
+    platforms: ["linkedin"],
     scheduledFor: daysAgo(5),
     status: "failed",
     hookId: "hk-4",
