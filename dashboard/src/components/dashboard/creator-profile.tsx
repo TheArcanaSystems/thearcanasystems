@@ -7,13 +7,13 @@ export function CreatorProfile() {
     <div className="flex items-center gap-3 px-3 py-4">
       <Avatar className="size-10 border border-sidebar-border">
         <AvatarFallback className="bg-sidebar-primary text-sidebar-primary-foreground font-semibold">
-          TM
+          TA
         </AvatarFallback>
       </Avatar>
       <div className="flex min-w-0 flex-col">
         <div className="flex items-center gap-1">
           <span className="truncate font-display text-base font-semibold text-sidebar-foreground">
-            @tenfoldmarc
+            @thearcanasystems
           </span>
           <BadgeCheck className="size-3.5 shrink-0 text-sidebar-primary" />
         </div>

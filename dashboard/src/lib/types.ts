@@ -1,4 +1,4 @@
-export type Platform = "instagram" | "tiktok" | "youtube" | "x" | "threads";
+export type Platform = "instagram" | "linkedin" | "tiktok" | "youtube" | "x" | "threads";
 
 export type HookType =
   | "callout"

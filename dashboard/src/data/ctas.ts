@@ -1,7 +1,7 @@
 export const ctas: string[] = [
-  "Follow for more breakdowns like this.",
-  "Save this before it disappears from your feed.",
-  "Comment \"SEND\" and I'll DM you the template.",
-  "Share this with the creator who needs to hear it.",
-  "Drop a 🔥 if you're trying this on your next post.",
+  "Follow for more systems and templates like this.",
+  "Save this — you'll want it when your spreadsheet finally breaks.",
+  "Comment 'TEMPLATE' and I'll send you the SOP.",
+  "Share this with the founder still running on spreadsheets.",
+  "Comment 'SYSTEM' and I'll DM you the exact setup.",
 ];

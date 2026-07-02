@@ -1,4 +1,7 @@
+"use client";
+
 import { AtSign, Flame, Mail, Newspaper, Rss, SkipForward, Wand2 } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 import { PageHeader } from "@/components/dashboard/page-header";
 import { Badge } from "@/components/ui/badge";
@@ -48,6 +51,7 @@ function hoursAgoLabel(iso: string) {
 }
 
 export default function TrendingPage() {
+  const router = useRouter();
   const byRecency = [...trendingItems].sort(
     (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
   );
@@ -120,7 +124,7 @@ export default function TrendingPage() {
                   <Flame className="size-3.5" />
                   Hook potential
                 </span>
-                <Button variant="ghost" size="sm" className="h-7 px-2">
+                <Button variant="ghost" size="sm" className="h-7 px-2" onClick={() => router.push("/hook-vault")}>
                   <Wand2 className="size-3.5" />
                   Draft hook
                 </Button>
@@ -166,6 +170,7 @@ export default function TrendingPage() {
                   size="sm"
                   className="h-7 px-2"
                   disabled={item.tag === "skip"}
+                  onClick={() => router.push("/hook-vault")}
                 >
                   <Wand2 className="size-3.5" />
                   Draft hook
